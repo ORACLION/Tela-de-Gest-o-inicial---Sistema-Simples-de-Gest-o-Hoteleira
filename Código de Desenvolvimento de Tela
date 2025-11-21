@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" />
+  <title>Sistema de Gerenciamento de Hotéis — Painel de Gestão</title>
+
+  
+  <style>
+    :root{
+      --primary:#213a5c; 
+      --accent:#0f2940;
+      --card-border:#e0e6ea;
+      --text:#111;
+      --muted:#6b7280;
+      --radius:10px;
+      --max-width:1100px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color:var(--text);
+      background:#ffffff;
+    }
+
+    
+    .site-header{
+      background:linear-gradient(180deg,var(--primary),var(--accent));
+      color:#fff;
+      padding:18px 24px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    }
+    .brand{
+      font-size:20px;
+      font-weight:600;
+      letter-spacing:0.2px;
+      text-align:center;
+    }
+    .user{
+      position:absolute;
+      right:20px;
+      top:50%;
+      transform:translateY(-50%);
+      display:flex;
+      gap:8px;
+      align-items:center;
+      font-size:15px;
+      color:rgba(255,255,255,0.95);
+    }
+    .user .avatar{
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.12);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:#fff;
+      font-size:14px;
+    }
+
+    
+    .container{
+      max-width: var(--max-width);
+      margin: 36px auto;
+      padding: 0 20px;
+    }
+
+    
+    .page-title{
+      text-align:center;
+      font-size:42px;
+      margin: 8px 0 28px 0;
+      font-weight:700;
+      color:var(--text);
+    }
+
+   
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:28px;
+      align-items:center;
+      justify-items:center;
+    }
+
+    .action-card{
+      width:100%;
+      max-width:470px;
+      min-height:110px;
+      background:#fff;
+      border-radius:var(--radius);
+      border:1.5px solid var(--card-border);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 4px 14px rgba(16,24,40,0.03);
+      cursor:pointer;
+      transition: transform .12s ease, box-shadow .12s ease;
+      text-decoration:none;
+      color:var(--text);
+      font-size:30px;
+      font-weight:600;
+      user-select:none;
+    }
+    .action-card:focus,
+    .action-card:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(16,24,40,0.08);
+      outline: none;
+      border-color:#cbd5e1;
+    }
+
+    
+    @media (max-width:900px){
+      .page-title{ font-size:34px; }
+      .grid{ gap:18px; }
+      .action-card{ font-size:24px; max-width:420px; min-height:94px; }
+    }
+    @media (max-width:640px){
+      .page-title{ font-size:26px; margin-top:8px; }
+      .grid{ grid-template-columns: 1fr; }
+      .action-card{ font-size:22px; max-width:520px; min-height:84px; }
+      .container{ margin:18px auto; }
+      .user{ display:none; } 
+    }
+
+    
+    .hint{
+      margin-top:28px;
+      color:var(--muted);
+      text-align:center;
+      font-size:14px;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <header class="site-header" role="banner">
+    <div class="brand" aria-hidden="true">Sistema de Gerenciamento de Hotéis</div>
+
+    <div class="user" aria-label="Usuário logado">
+      <span class="avatar" aria-hidden="true">U</span>
+      <span>Usuário</span>
+    </div>
+  </header>
+
+ 
+  <main class="container" role="main">
+    
+    <h1 class="page-title">Painel de Gestão</h1>
+
+    
+    <section class="grid" aria-label="Ações principais do sistema">
+      <a href="#" class="action-card" role="button" aria-pressed="false" onclick="openAction(event,'reservas')">
+        Fazer Reserva
+      </a>
+
+      <a href="#" class="action-card" role="button" aria-pressed="false" onclick="openAction(event,'checkin')">
+        Check-in
+      </a>
+
+      <a href="#" class="action-card" role="button" aria-pressed="false" onclick="openAction(event,'checkout')">
+        Check-out
+      </a>
+
+      <a href="#" class="action-card" role="button" aria-pressed="false" onclick="openAction(event,'quartos')">
+        Gerenciar Quartos
+      </a>
+
+      <a href="#" class="action-card" role="button" aria-pressed="false" onclick="openAction(event,'servico')">
+        Registrar Serviço
+      </a>
+
+      <a href="#" class="action-card" role="button" aria-pressed="false" onclick="openAction(event,'relatorios')">
+        Gerar Relatórios
+      </a>
+    </section>
+
+    <p class="hint">Clique nos botões para navegar entre as funcionalidades (aqui simuladas).</p>
+  </main>
+
+  
+  <script>
+    
+    function openAction(e, action){
+      e.preventDefault();
+      
+      const messages = {
+        reservas: 'Abrindo módulo de reservas...',
+        checkin: 'Abrindo processo de check-in...',
+        checkout: 'Abrindo processo de check-out...',
+        quartos: 'Abrindo cadastro/gerenciamento de quartos...',
+        servico: 'Abrindo lançamento de serviços...',
+        relatorios: 'Gerando relatórios...'
+      };
+      const msg = messages[action] || 'Abrindo...';
+      
+      window.alert(msg);
+    }
+
+    document.querySelectorAll('.action-card').forEach(function(el){
+      el.addEventListener('keydown', function(ev){
+        if(ev.key === 'Enter' || ev.key === ' '){
+          ev.preventDefault();
+          el.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
